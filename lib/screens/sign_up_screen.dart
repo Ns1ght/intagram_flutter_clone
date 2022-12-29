@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instragram_flutter/resources/auth_methods.dart';
 import 'package:instragram_flutter/utils/colors.dart';
 import 'package:instragram_flutter/widgets/text_field_input.dart';
 
@@ -30,6 +31,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -110,7 +112,15 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               // button for loggin
               InkWell(
-                onTap: () {},
+                onTap: () async {
+                  String res = await AuthMethods().signUpUser(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    username: _usernameController.text,
+                    bio: _bioController.text,
+                  );
+                  print('res');
+                },
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
